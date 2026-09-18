@@ -1,0 +1,21 @@
+# Lixo que o Windows e o macOS deixam nas pastas
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Configurações de editor
+.vscode/
+.idea/
+
+# Se um dia entrar programação com dependências
+node_modules/
+.env
+.env.*
+
+# Documento comercial: fica na maquina, nao vai para o site publicado
+proposta-whatsapp.md
+
+# Material de trabalho: originais das fotos baixadas do Instagram,
+# arquivos recebidos por WhatsApp. Fica na maquina, nunca no site publicado.
+# O que o site usa esta em assets/.
+Docs/
