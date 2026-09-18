@@ -30,13 +30,41 @@ document.querySelectorAll('[data-zap]').forEach((botao) => {
 // Cabeçalho ganha sombra quando a página rola
 // ---------------------------------------------------------------------
 const cabecalho = document.querySelector('.cabecalho');
+const voltarTopo = document.querySelector('.voltar-topo');
 
 function conferirRolagem() {
     cabecalho.classList.toggle('rolou', window.scrollY > 10);
+    voltarTopo.classList.toggle('visivel', window.scrollY > 600);
 }
 
 window.addEventListener('scroll', conferirRolagem, { passive: true });
 conferirRolagem();
+
+voltarTopo.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+
+// ---------------------------------------------------------------------
+// Menu do celular
+//
+// Abre logo abaixo do cabeçalho: a altura é medida na hora, porque a
+// faixa de cima quebra em duas linhas nas telas estreitas e uma conta
+// fixa esconderia o primeiro item.
+// ---------------------------------------------------------------------
+const botaoMenu = document.querySelector('.abrir-menu');
+
+function fecharMenu() {
+    document.body.classList.remove('menu-aberto');
+    botaoMenu.setAttribute('aria-expanded', 'false');
+}
+
+botaoMenu.addEventListener('click', () => {
+    const baseDoCabecalho = Math.max(cabecalho.getBoundingClientRect().bottom, 0);
+    document.documentElement.style.setProperty('--menu-top', baseDoCabecalho + 'px');
+    const aberto = document.body.classList.toggle('menu-aberto');
+    botaoMenu.setAttribute('aria-expanded', String(aberto));
+});
+
+document.querySelectorAll('#menu a').forEach((link) => link.addEventListener('click', fecharMenu));
 
 
 // ---------------------------------------------------------------------

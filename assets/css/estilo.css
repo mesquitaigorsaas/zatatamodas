@@ -290,11 +290,87 @@ h1 em, h2 em {
     box-shadow: none;
 }
 
+/* ---- Menu do celular ----
+   O botão aparece só abaixo de 900px. O menu abre a partir do pé do
+   cabeçalho (--menu-top, medido pelo JS), então a faixa de cima e a
+   logo continuam à vista. */
 .abrir-menu {
-    display: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--linho);
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.abrir-menu span,
+.abrir-menu span::before,
+.abrir-menu span::after {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--tinta);
+    position: relative;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.abrir-menu span::before,
+.abrir-menu span::after { content: ''; position: absolute; left: 0; }
+.abrir-menu span::before { top: -6px; }
+.abrir-menu span::after { top: 6px; }
+.menu-aberto .abrir-menu span { background: transparent; }
+.menu-aberto .abrir-menu span::before { transform: translateY(6px) rotate(45deg); }
+.menu-aberto .abrir-menu span::after { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 899px) {
+    .menu-aberto .menu {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        position: fixed;
+        inset: var(--menu-top, 68px) 0 0 0;
+        z-index: 55;
+        padding: 24px 22px 40px;
+        background: var(--creme);
+        overflow-y: auto;
+    }
+
+    .menu-aberto .menu a {
+        font-family: var(--titulo);
+        font-size: clamp(1.8rem, 8vw, 2.2rem);
+        font-weight: 600;
+        color: var(--tinta);
+        text-decoration: none;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--linho);
+    }
+
+    .menu-aberto { overflow: hidden; }
+
+    /* O desfoque do cabeçalho vira a "moldura" de tudo que é fixo lá
+       dentro, e prenderia o menu à altura do cabeçalho. Com o menu
+       aberto, o fundo fica liso e o menu ocupa a tela de verdade. */
+    .menu-aberto .cabecalho {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background-color: var(--creme);
+    }
+}
+
+/* Em tela estreita o botão do cabeçalho fica só com o ícone, para
+   caber logo + WhatsApp + menu sem nada ser cortado. */
+@media (max-width: 420px) {
+    .cabecalho .botao .rotulo { display: none; }
+    .cabecalho .botao { padding: 8px 11px; }
 }
 
 @media (min-width: 900px) {
+    .abrir-menu { display: none; }
+
     .menu {
         display: flex;
         gap: 28px;
@@ -1306,6 +1382,36 @@ h1 em, h2 em {
 @media (prefers-reduced-motion: reduce) {
     .zap-flutuante::before { animation: none; }
 }
+
+
+/* ---------------------------------------------------------------------
+   VOLTAR AO TOPO
+   Logo acima do botão do WhatsApp, e só depois de rolar um pouco.
+   --------------------------------------------------------------------- */
+.voltar-topo {
+    position: fixed;
+    right: 24px;
+    bottom: 92px;
+    z-index: 60;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--linho);
+    background: #fff;
+    color: var(--rosa-escuro);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(43, 33, 30, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.2s, color 0.2s;
+}
+
+.voltar-topo svg { width: 22px; height: 22px; }
+.voltar-topo.visivel { opacity: 1; visibility: visible; transform: none; }
+.voltar-topo:hover { background: var(--rosa); color: #fff; border-color: var(--rosa); }
 
 
 /* ---------------------------------------------------------------------

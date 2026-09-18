@@ -52,7 +52,7 @@
                 </div>
             </a>
 
-            <nav class="menu" aria-label="Seções da página">
+            <nav class="menu" id="menu" aria-label="Seções da página">
                 <a href="#novidades">Novidades</a>
                 <a href="#estilo">Teste de estilo</a>
                 <a href="#acessorios">Acessórios</a>
@@ -64,8 +64,11 @@
                data-zap="Oi! Vim pelo site da Zatata e quero ver as novidades."
                target="_blank" rel="noopener">
                 <svg class="icone" aria-hidden="true"><use href="#i-zap"></use></svg>
-                WhatsApp
+                <span class="rotulo">WhatsApp</span>
             </a>
+            <!-- Menu do celular. Abre logo abaixo do cabeçalho, sem cobrir
+                 a faixa de cima nem a logo (o JS mede a altura). -->
+            <button class="abrir-menu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
         </div>
     </header>
 
@@ -567,6 +570,10 @@
        target="_blank" rel="noopener" aria-label="Falar com a Zatata no WhatsApp">
         <svg class="icone" aria-hidden="true"><use href="#i-zap"></use></svg>
     </a>
+
+    <button class="voltar-topo" type="button" aria-label="Voltar ao topo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></svg>
+    </button>
 
     <script src="assets/js/site.js"></script>
 
