@@ -361,11 +361,11 @@ h1 em, h2 em {
     }
 }
 
-/* Em tela estreita o botão do cabeçalho fica só com o ícone, para
-   caber logo + WhatsApp + menu sem nada ser cortado. */
-@media (max-width: 420px) {
-    .cabecalho .botao .rotulo { display: none; }
-    .cabecalho .botao { padding: 8px 11px; }
+/* No celular o cabeçalho fica só com a logo e o menu: o WhatsApp já
+   está no botão verde flutuante, sempre à mão, e dois botões iguais
+   disputavam o mesmo espaço. */
+@media (max-width: 899px) {
+    .cabecalho .botao { display: none; }
 }
 
 @media (min-width: 900px) {
